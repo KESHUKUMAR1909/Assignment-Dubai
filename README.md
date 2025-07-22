@@ -64,5 +64,5 @@ src/
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/KESHUKUMAR1909/Dummy-json-frontend
+git clone https://github.com/KESHUKUMAR1909/Assignment-Dubai
 

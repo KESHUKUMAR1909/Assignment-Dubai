@@ -1,15 +1,24 @@
 .product-page {
   display: flex;
+  height: 100vh;
+  overflow: hidden;
 }
 
 .left-part-2 {
   width: 20%;
+  background-color: #f4f4f4;
+  position: fixed;
+  height: 100%;
+  overflow: hidden;
 }
 
 .right-part-2 {
+  margin-left: 20%;
   width: 80%;
+  overflow-y: auto;
+  height: 100vh;
   padding: 20px;
-  background-color: #f9f9f9;
+  box-sizing: border-box;
 }
 
 .top-bar {
@@ -19,36 +28,28 @@
 }
 
 .add-product-btn {
-  padding: 10px 15px;
+  padding: 8px 16px;
   background-color: #4f46e5;
   color: white;
   border: none;
-  border-radius: 8px;
+  border-radius: 6px;
   cursor: pointer;
 }
 
 .product-table-container {
-  margin-top: 30px;
+  margin-top: 20px;
 }
 
 .product-table {
   width: 100%;
   border-collapse: collapse;
-  background-color: white;
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
 }
 
 .product-table th,
 .product-table td {
-  padding: 15px;
+  padding: 10px;
   text-align: left;
-  border-bottom: 1px solid #e5e7eb;
-}
-
-.product-table th {
-  background-color: #f3f4f6;
+  border-bottom: 1px solid #ddd;
 }
 
 .low-stock {
@@ -59,4 +60,43 @@
 .in-stock {
   color: green;
   font-weight: bold;
+}
+
+.show-more-btn {
+  margin-top: 10px;
+  padding: 6px 12px;
+  background-color: #ddd;
+  border: none;
+  cursor: pointer;
+}
+
+.chart-container {
+  margin-top: 40px;
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background: white;
+  padding: 20px;
+  width: 300px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.modal-buttons {
+  display: flex;
+  justify-content: space-between;
 }

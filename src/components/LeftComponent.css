@@ -38,3 +38,7 @@
 .navigation-part li:hover {
   color: #facc15; /* yellow hover */
 }
+a{
+  color: white;
+  text-decoration: none;
+}

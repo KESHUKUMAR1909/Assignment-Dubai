@@ -1,17 +1,43 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
-  BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer
+  BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend
 } from 'recharts';
+
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchProducts } from '../redux/Thunk/productThunk';
 
 import LeftComponent from '../components/LeftComponent';
 import Card from '../components/Card';
 import './css/Dashboard.css';
+import { useNavigate } from 'react-router-dom';
 
 const Dashboard = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const { products, loading, error } = useSelector((state) => state.products);
+  const { token } = useSelector((state) => state.auth);
+
+  useEffect(() => {
+    if (!token) {
+      navigate('/login');
+    } else {
+      dispatch(fetchProducts());
+    }
+  }, [dispatch, token, navigate]);
+
+  const totalProducts = products.length;
+  const lowStockProducts = products.filter((p) => p.stock < 50).length;
+
   const chartData = [
-    { name: 'Products', count: 7 },
-    { name: 'Low Stock', count: 100 }
+    { name: 'Total Products', count: totalProducts },
+    { name: 'Low Stock', count: lowStockProducts }
   ];
+
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    window.location.href = '/login'; // refresh to clear state
+  };
 
   return (
     <div className='dashboard'>
@@ -22,14 +48,14 @@ const Dashboard = () => {
       <div className='right-part-2'>
         <div className='top-bar'>
           <h1>Dashboard</h1>
-          <button className='logout-btn'>Logout</button>
+          <button className='logout-btn' onClick={handleLogout}>Logout</button>
         </div>
 
         <div className='welcome'>
           <h2>Welcome, Keshu Kumar</h2>
         </div>
 
-        {/* 🔢 Card Section from chartData */}
+        {/* 🔢 Analytics Cards */}
         <div className='card-container'>
           {chartData.map((item, index) => (
             <Card
@@ -54,16 +80,22 @@ const Dashboard = () => {
         {/* 📊 Chart Section */}
         <div className='chart-container'>
           <h2>Product Analytics</h2>
-          <ResponsiveContainer width="100%" height={300}>
-            <BarChart data={chartData}>
-              <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="name" />
-              <YAxis />
-              <Tooltip />
-              <Legend />
-              <Bar dataKey="count" fill="#4f46e5" />
-            </BarChart>
-          </ResponsiveContainer>
+          {loading ? (
+            <p>Loading chart...</p>
+          ) : error ? (
+            <p style={{ color: 'red' }}>{error}</p>
+          ) : (
+            <ResponsiveContainer width="100%" height={300}>
+              <BarChart data={chartData}>
+                <CartesianGrid strokeDasharray="3 3" />
+                <XAxis dataKey="name" />
+                <YAxis />
+                <Tooltip />
+                <Legend />
+                <Bar dataKey="count" fill="#4f46e5" />
+              </BarChart>
+            </ResponsiveContainer>
+          )}
         </div>
       </div>
     </div>

@@ -1,6 +1,6 @@
 import React from 'react';
 import './LeftComponent.css';
-
+import {Link} from 'react-router-dom';
 const LeftComponent = ({ width }) => {
   return (
     <div className='left-part' style={{ width }}>
@@ -12,8 +12,8 @@ const LeftComponent = ({ width }) => {
       </div>
 
       <ul className='navigation-part'>
-        <li>Dashboard</li>
-        <li>Products</li>
+        <li><Link to={'/dashboard'}>  Dashboard</Link></li>
+         <li><Link to={'/products'}> Product</Link></li>
       </ul>
     </div>
   );

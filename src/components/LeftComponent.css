@@ -1,0 +1,40 @@
+.left-part {
+  display: flex;
+  flex-direction: column;
+  background-color: navy;
+  color: white;
+  height: 100vh;
+  padding: 20px;
+  gap: 40px; /* space between user and navigation */
+}
+
+.user-profile {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 18px;
+}
+
+.user-profile img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+.navigation-part {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 0;
+  font-size: 18px;
+}
+
+.navigation-part li {
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.navigation-part li:hover {
+  color: #facc15; /* yellow hover */
+}
